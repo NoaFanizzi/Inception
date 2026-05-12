@@ -62,8 +62,8 @@ networks:
 
 secrets:
   db_password:
-    file: /home/nofanizz/Documents/inception/secrets/db_password.txt
+    file: ../secrets/db_password.txt
   db_root_password:
-    file: /home/nofanizz/Documents/inception/secrets/db_root_password.txt
+    file: ../secrets/db_root_password.txt
   credentials:
-    file: /home/nofanizz/Documents/inception/secrets/credentials.txt
+    file: ../secrets/credentials.txt
