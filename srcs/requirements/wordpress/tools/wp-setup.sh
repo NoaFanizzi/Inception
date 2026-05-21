@@ -16,7 +16,6 @@ if [ ! -f wp-config.php ]; then
         --dbpass=$DB_PASSWORD \
         --dbhost=$MYSQL_HOST
 
-    # Attend que MariaDB soit prêt
     until wp db check --allow-root 2>/dev/null; do
         echo "Waiting for MariaDB..."
         sleep 2
@@ -29,7 +28,6 @@ if [ ! -f wp-config.php ]; then
         --admin_password="$WP_ADMIN_PASSWORD" \
         --admin_email="$WP_ADMIN_EMAIL"
 
-    # Crée un second utilisateur
     wp user create --allow-root \
         $WP_USER $WP_USER_EMAIL \
         --role=author \
