@@ -3,7 +3,7 @@
 # Inception
 
 ## Description
-Inception is a 42 system administration project. The goal is to deploy a small web infrastructure using **Docker Compose**, with each service isolated in its own container built from Debian Bookworm:
+Inception is a 42 system administration project. The goal is to deploy a small web infrastructure using **Docker Compose**, with each service isolated in its own container built from Debian Bullseye:
 
 - **nginx** — reverse proxy, only entry point (HTTPS port 443, TLSv1.2/1.3)
 - **wordpress** — PHP-FPM application, configured via WP-CLI
