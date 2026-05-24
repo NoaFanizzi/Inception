@@ -8,7 +8,9 @@ mkdir -p /var/www/html
 cd /var/www/html
 
 if [ ! -f wp-config.php ]; then
-    wp core download --allow-root
+    if [ ! -f wp-login.php ]; then
+        wp core download --allow-root
+    fi
 
     wp config create --allow-root \
         --dbname=$MYSQL_DATABASE \
@@ -31,7 +33,7 @@ if [ ! -f wp-config.php ]; then
     wp user create --allow-root \
         $WP_USER $WP_USER_EMAIL \
         --role=author \
-        --user_pass="visitor123"
+        --user_pass="$WP_USER_PASSWORD"
 fi
 
 exec php-fpm8.2 -F

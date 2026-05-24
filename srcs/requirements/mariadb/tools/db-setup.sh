@@ -4,21 +4,21 @@ DB_PASSWORD=$(cat /run/secrets/db_password)
 DB_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo ">>> Initialisation de la DB"
+    echo ">>> Initialization of the DB"
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
 fi
 
-echo ">>> Démarrage temporaire de mysqld"
+echo ">>> Temporary launch of mysqld"
 mysqld_safe &
 MYSQL_PID=$!
 
-echo ">>> Attente du socket..."
+echo ">>> Waiting for socket ..."
 until mysqladmin ping --socket=/run/mysqld/mysqld.sock --silent 2>/dev/null; do
     sleep 1
 done
-echo ">>> Socket prêt"
+echo ">>> Socket ready !"
 
-echo ">>> Configuration de la DB"
+echo ">>> Configuration of the DB"
 mysql -h localhost --socket=/run/mysqld/mysqld.sock -u root <<EOF
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
@@ -27,9 +27,9 @@ GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
-echo ">>> Arrêt du mysqld temporaire"
+echo ">>> Temporary supsension of mysqld"
 mysql -h localhost --socket=/run/mysqld/mysqld.sock -u root -p"${DB_ROOT_PASSWORD}" -e "SHUTDOWN;"
 wait $MYSQL_PID
 
-echo ">>> Démarrage final de mysqld"
+echo ">>> Final start of mysqld"
 exec mysqld_safe

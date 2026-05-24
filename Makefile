@@ -1,5 +1,5 @@
 all:
-	mkdir -p /home/login/data/wordpress /home/login/data/mariadb
+	mkdir -p /home/nofanizz/data/wordpress /home/nofanizz/data/mariadb
 	cd srcs && docker compose up -d --build
 
 down:
