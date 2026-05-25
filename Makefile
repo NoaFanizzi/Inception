@@ -12,6 +12,6 @@ clean:
 
 fclean: clean
 	docker system prune -af
-	sudo rm -rf /home/login/data
+	sudo rm -rf /home/nofanizz/data
 
 .PHONY: all down re clean fclean
